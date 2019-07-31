@@ -1,0 +1,128 @@
+import time
+from selenium import webdriver
+import datetime
+import random
+import requests, bs4
+import json
+
+# Selectタグが扱えるエレメントに変化させる為の関数を呼び出す
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+
+print('Srarting... MMD_HACK_BOT. by MMD_HACK....')
+
+
+#必要情報
+print('YID？')
+YID = input()
+print('YPASS？')
+YPASS = input()
+
+driver = webdriver.Chrome(executable_path='./chromedriver')
+driver.implicitly_wait(10)
+
+driver.get('https://login.yahoo.co.jp/config/login')
+
+driver.find_element_by_id("username").send_keys(YID)
+time.sleep(1)
+
+driver.find_element_by_name("btnNext").click
+element = driver.find_element_by_name('btnNext')
+element.click()
+
+time.sleep(1)
+
+driver.find_element_by_name("passwd").send_keys(YPASS)
+driver.find_element_by_name("btnSubmit").click()
+# ログインまでの動作
+
+
+
+while True:
+    driver.get("http://addcart.sakura.ne.jp/yahoo.php?c=digitamin&i=ye64731")
+    driver.implicitly_wait(1)
+    
+    try:
+      stock = driver.find_element_by_xpath("//*[@id='item']/div/form/div[2]/div[1]/table/tbody/tr[2]/td[3]/ul/li[1]").text
+      if stock == "在庫：在庫あり":
+          break
+    except:
+      pass
+
+
+print("在庫あり。注文情報入力に進みます。")  
+# 要素がある場合の処理
+element2 = driver.find_element_by_name('checkout-digitamin')
+element2.click()
+time.sleep(1)
+
+'''
+# 再度ログインの場合(パスワードを再度入力してください。)
+relogin = driver.find_element_by_xpath('//*[@id="inpAuthMethod"]').text
+if relogin == "パスワードを再度入力してください":
+    driver.find_element_by_name("passwd").send_keys('YPASS')
+    driver.find_element_by_name("btnSubmit").click()
+    time.sleep(1)
+
+else:
+    submit = driver.find_element_by_name("to-review")
+    submit.click()
+
+'''
+try:
+    elem = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "95bbcb83ff14978e880d4f7e7c96f67a")))
+except Exception:
+    driver.quit()
+
+driver.execute_script("arguments[0].click();", elem)
+
+driver.implicitly_wait(1)
+submit = driver.find_element_by_name("to-review")
+submit.click()
+
+
+#最終支払確認画面
+finalgate = driver.find_element_by_name("decide")
+finalgate.click
+
+
+#こっからウェブフック
+webhook_url = "https://discordapp.com/api/webhooks/605344589422919690/9wuG9gZJZf6lreGzxxJhVLyK9P5ZobOQrfUZ1khJbGPwtr0NRU0jTUg-bnk3VJ3Orm6e"
+
+main_content = {
+  "username": "MMDHACK",
+  "avatar_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png",
+  "content": "Checkout Success:cowboy:  ",
+  "embeds": [
+    {
+      "author": {
+        "name": "MMD_HACK_BOT. by MMD_HACK....",
+      },
+      "description": "　",
+      "color": 15792383,
+      "fields": [
+        {
+          "name": "製品",
+          "value": "バンダイコレクターズ METAL STRUCTURE 解体匠機 RX-93 νガンダム",
+          "inline": True
+        },
+        {
+          "name": "サイズ",
+          "value": "N/A",
+          "inline": True
+        }
+      ],
+      "footer": {
+        "text": "MMD_HACK.IO",
+        "icon_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png"
+      }
+    }
+  ]
+}
+ 
+ 
+requests.post(webhook_url,json.dumps(main_content),headers={'Content-Type': 'application/json'})
