@@ -20,6 +20,16 @@ print('YID？')
 YID = input()
 print('YPASS？')
 YPASS = input()
+product = input("商品を選んでください。\n1.ガンダム \n2.バルキリー \n3.エヴァ2号機 \n※半角で数字のみ入力してください:")
+
+if product == "1":
+  product = ("http://addcart.sakura.ne.jp/yahoo.php?i=YE64731&c=digitamin")
+elif product == "2":
+  product = ("http://addcart.sakura.ne.jp/yahoo.php?i=YE64416&c=digitamin")
+elif product == "3":
+  product = ("http://addcart.sakura.ne.jp/yahoo.php?i=YF64982&c=digitamin")
+else :
+  print("error")
 
 driver = webdriver.Chrome(executable_path='./chromedriver')
 driver.implicitly_wait(10)
@@ -93,36 +103,101 @@ finalgate.click
 #こっからウェブフック
 webhook_url = "https://discordapp.com/api/webhooks/605344589422919690/9wuG9gZJZf6lreGzxxJhVLyK9P5ZobOQrfUZ1khJbGPwtr0NRU0jTUg-bnk3VJ3Orm6e"
 
-main_content = {
-  "username": "MMDHACK",
-  "avatar_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png",
-  "content": "Checkout Success:cowboy:  ",
-  "embeds": [
-    {
-      "author": {
-        "name": "MMD_HACK_BOT. by MMD_HACK....",
-      },
-      "description": "　",
-      "color": 15792383,
-      "fields": [
-        {
-          "name": "製品",
-          "value": "バンダイコレクターズ METAL STRUCTURE 解体匠機 RX-93 νガンダム",
-          "inline": True
+if product == "1":
+  main_content = {
+    "username": "MMDHACK",
+    "avatar_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png",
+    "content": "Checkout Success:cowboy:  ",
+    "embeds": [
+      {
+        "author": {
+          "name": "MMD AIO",
         },
-        {
-          "name": "サイズ",
-          "value": "N/A",
-          "inline": True
+        "description": "　",
+        "color": 15792383,
+        "fields": [
+          {
+            "name": "製品",
+            "value": "バンダイコレクターズ METAL STRUCTURE 解体匠機 RX-93 νガンダム",
+            "inline": True
+          },
+          {
+            "name": "サイズ",
+            "value": "N/A",
+            "inline": True
+          }
+        ],
+        "footer": {
+          "text": "MMD_HACK.IO",
+          "icon_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png"
         }
-      ],
-      "footer": {
-        "text": "MMD_HACK.IO",
-        "icon_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png"
       }
-    }
-  ]
-}
+    ]
+  }
+elif product == "2":
+  main_content = {
+    "username": "MMDHACK",
+    "avatar_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png",
+    "content": "Checkout Success:cowboy:  ",
+    "embeds": [
+      {
+        "author": {
+          "name": "MMD AIO",
+        },
+        "description": "　",
+        "color": 15792383,
+        "fields": [
+          {
+            "name": "製品",
+            "value": "バンダイスピリッツ DX超合金 劇場版VF-1S バルキリー（一条輝機）",
+            "inline": True
+          },
+          {
+            "name": "サイズ",
+            "value": "N/A",
+            "inline": True
+          }
+        ],
+        "footer": {
+          "text": "MMD_HACK.IO",
+          "icon_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png"
+        }
+      }
+    ]
+  }
+elif product == "3":
+  main_content = {
+    "username": "MMDHACK",
+    "avatar_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png",
+    "content": "Checkout Success:cowboy:  ",
+    "embeds": [
+      {
+        "author": {
+          "name": "MMD AIO",
+        },
+        "description": "　",
+        "color": 15792383,
+        "fields": [
+          {
+            "name": "製品",
+            "value": "バンダイスピリッツ METAL BUILD エヴァンゲリオン2号機 ",
+            "inline": True
+          },
+          {
+            "name": "サイズ",
+            "value": "N/A",
+            "inline": True
+          }
+        ],
+        "footer": {
+          "text": "MMD_HACK.IO",
+          "icon_url": "https://cdn.discordapp.com/attachments/496932301280641036/605554569329770506/2019-07-17_13.51.57.png"
+        }
+      }
+    ]
+  }
+else :
+  pass
  
  
 requests.post(webhook_url,json.dumps(main_content),headers={'Content-Type': 'application/json'})
