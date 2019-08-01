@@ -11,6 +11,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 print('Srarting... MMD_HACK_BOT. by MMD_HACK....')
 
@@ -31,7 +32,9 @@ elif product == "3":
 else :
   print("error")
 
-driver = webdriver.Chrome(executable_path='./chromedriver')
+options = Options()
+options.add_argument('--headless')
+driver = webdriver.Chrome(executable_path='./chromedriver',chrome_options=options)
 driver.implicitly_wait(10)
 
 driver.get('https://login.yahoo.co.jp/config/login')
